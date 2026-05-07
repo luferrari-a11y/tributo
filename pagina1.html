@@ -1,0 +1,1106 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>The Weeknd | XO Universe</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+/* RESET */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    scroll-behavior:smooth;
+}
+
+/* BODY */
+
+body{
+    background:black;
+    color:white;
+    font-family:'Montserrat', sans-serif;
+    overflow-x:hidden;
+    cursor:none;
+}
+
+/* CURSOR */
+
+.cursor{
+    width:20px;
+    height:20px;
+    border:2px solid red;
+    border-radius:50%;
+    position:fixed;
+    pointer-events:none;
+    transform:translate(-50%,-50%);
+    z-index:999999;
+    transition:transform 0.1s;
+}
+
+/* SCROLL */
+
+::-webkit-scrollbar{
+    width:8px;
+}
+
+::-webkit-scrollbar-thumb{
+    background:red;
+}
+
+/* PARTICLES */
+
+canvas{
+    position:fixed;
+    top:0;
+    left:0;
+    z-index:-1;
+}
+
+/* INTRO */
+
+#intro{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:black;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:99999;
+    animation:fadeOut 1.5s 5s forwards;
+}
+
+#intro video{
+    position:absolute;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    opacity:0.25;
+}
+
+#intro h1{
+    font-family:'Unbounded';
+    font-size:100px;
+    color:red;
+    letter-spacing:12px;
+    text-shadow:0 0 40px red;
+    z-index:2;
+    animation:zoom 2s;
+}
+
+#intro p{
+    z-index:2;
+    margin-top:20px;
+    opacity:0.8;
+}
+
+@keyframes zoom{
+
+from{
+    transform:scale(0.5);
+    opacity:0;
+}
+
+to{
+    transform:scale(1);
+    opacity:1;
+}
+
+}
+
+@keyframes fadeOut{
+
+to{
+    opacity:0;
+    visibility:hidden;
+}
+
+}
+
+/* NAV */
+
+nav{
+    position:fixed;
+    width:100%;
+    top:0;
+    padding:20px;
+    background:rgba(0,0,0,0.4);
+    backdrop-filter:blur(10px);
+    z-index:1000;
+    text-align:center;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    margin:0 15px;
+    transition:0.3s;
+    font-size:15px;
+}
+
+nav a:hover{
+    color:red;
+}
+
+/* HERO */
+
+.hero{
+    height:100vh;
+
+    background:
+    linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.9)),
+    url("fondo.jpg");
+
+    background-size:cover;
+    background-position:center;
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    position:relative;
+}
+
+.hero-content{
+    z-index:2;
+}
+
+.hero h1{
+    font-family:'Unbounded';
+    font-size:120px;
+    color:red;
+    text-shadow:0 0 40px red;
+}
+
+.hero p{
+    margin-top:20px;
+    font-size:20px;
+    opacity:0.8;
+}
+
+/* BUTTONS */
+
+.hero button{
+    margin-top:30px;
+    padding:15px 40px;
+    border:none;
+    background:red;
+    color:white;
+    border-radius:50px;
+    cursor:pointer;
+    transition:0.3s;
+    font-size:16px;
+}
+
+.hero button:hover{
+    transform:scale(1.08);
+}
+
+/* SECTION */
+
+section{
+    padding:120px 30px;
+    max-width:1300px;
+    margin:auto;
+}
+
+.section-title{
+    text-align:center;
+    color:red;
+    font-family:'Unbounded';
+    font-size:45px;
+    margin-bottom:50px;
+}
+
+/* BIO */
+
+.bio{
+    text-align:center;
+    line-height:2;
+    max-width:900px;
+    margin:auto;
+}
+
+/* STATS */
+
+.stats{
+    display:flex;
+    justify-content:center;
+    flex-wrap:wrap;
+    gap:25px;
+    margin-top:50px;
+}
+
+.stat{
+    background:#111;
+    padding:30px;
+    width:220px;
+    border-radius:20px;
+    text-align:center;
+    transition:0.3s;
+}
+
+.stat:hover{
+    transform:translateY(-10px);
+    box-shadow:0 0 30px rgba(255,0,0,0.3);
+}
+
+.stat h3{
+    font-size:40px;
+    color:red;
+}
+
+/* ALBUMS */
+
+.album-grid{
+    display:flex;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:30px;
+}
+
+.album{
+    background:#111;
+    width:300px;
+    border-radius:20px;
+    overflow:hidden;
+    transition:0.4s;
+}
+
+.album:hover{
+    transform:scale(1.03);
+    box-shadow:0 0 25px rgba(255,0,0,0.4);
+}
+
+.album img{
+    width:100%;
+    height:300px;
+    object-fit:cover;
+}
+
+.album-content{
+    padding:20px;
+}
+
+/* TOURS */
+
+.tours{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.tour{
+    background:#111;
+    padding:20px;
+    border-radius:15px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.tour button{
+    background:red;
+    border:none;
+    color:white;
+    padding:10px 20px;
+    border-radius:30px;
+}
+
+/* VIDEO */
+
+.video-container{
+    position:relative;
+    width:100%;
+    padding-bottom:56.25%;
+}
+
+.video-container iframe{
+    position:absolute;
+    width:100%;
+    height:100%;
+    border:none;
+    border-radius:20px;
+}
+
+/* SPOTIFY */
+
+.spotify{
+    display:flex;
+    justify-content:center;
+}
+
+/* GALLERY */
+
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+}
+
+.gallery img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+    border-radius:15px;
+    transition:0.3s;
+    cursor:pointer;
+}
+
+.gallery img:hover{
+    transform:scale(1.03);
+}
+
+/* MODAL */
+
+.modal{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.95);
+    display:none;
+    justify-content:center;
+    align-items:center;
+    z-index:99999;
+}
+
+.modal img{
+    max-width:85%;
+    max-height:85%;
+    border-radius:20px;
+}
+
+/* NEWSLETTER */
+
+.newsletter{
+    background:#111;
+    padding:50px;
+    border-radius:20px;
+    text-align:center;
+}
+
+.newsletter input{
+    padding:15px;
+    width:300px;
+    border:none;
+    border-radius:40px;
+    margin-top:20px;
+}
+
+.newsletter button{
+    padding:15px 30px;
+    border:none;
+    background:red;
+    color:white;
+    border-radius:40px;
+    margin-left:10px;
+}
+
+/* FOOTER */
+
+footer{
+    padding:50px;
+    text-align:center;
+    background:#050505;
+}
+
+/* MUSIC BUTTON */
+
+.music-btn{
+    position:fixed;
+    bottom:20px;
+    right:20px;
+    width:65px;
+    height:65px;
+    border:none;
+    border-radius:50%;
+    background:red;
+    color:white;
+    font-size:22px;
+    cursor:pointer;
+    z-index:9999;
+}
+
+/* RESPONSIVE */
+
+@media(max-width:768px){
+
+.hero h1{
+    font-size:55px;
+}
+
+#intro h1{
+    font-size:55px;
+}
+
+.section-title{
+    font-size:35px;
+}
+
+nav a{
+    display:inline-block;
+    margin:6px;
+}
+
+.tour{
+    flex-direction:column;
+    gap:15px;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- CURSOR -->
+
+<div class="cursor" id="cursor"></div>
+
+<!-- PARTICLES -->
+
+<canvas id="particles"></canvas>
+
+<!-- INTRO -->
+
+<div id="intro">
+
+<video autoplay muted loop>
+<source src="https://cdn.coverr.co/videos/coverr-live-concert-1564846751264?download=1080p">
+</video>
+
+<h1>THE WEEKND</h1>
+<p>Enter The XO Universe 🌙</p>
+
+</div>
+
+<!-- NAV -->
+
+<nav>
+
+<a href="#bio">Vida</a>
+<a href="#albums">Álbumes</a>
+<a href="#tours">Tours</a>
+<a href="#live">Live</a>
+<a href="#spotify">Spotify</a>
+<a href="#gallery">Galería</a>
+<a href="#newsletter">Newsletter</a>
+
+</nav>
+
+<!-- HERO -->
+
+<div class="hero">
+
+<div class="hero-content">
+
+<h1>XO UNIVERSE</h1>
+
+<p>Dark vibes • Neon dreams • Cinematic world</p>
+
+<button onclick="document.getElementById('albums').scrollIntoView()">
+Explorar
+</button>
+
+</div>
+
+</div>
+
+<!-- BIO -->
+
+<section id="bio">
+
+<h2 class="section-title">Vida y carrera</h2>
+
+<p class="bio">
+
+The weeknd, cuyo nombre real es Abel Tesfaye, nació en Toronto, Canadá. Desde joven encontró en la música una forma de expresarse y comenzó su carrera subiendo canciones de manera anónima a internet, generando misterio y llamando rápidamente la atención del público. Con el paso del tiempo se convirtió en una de las mayores estrellas de la música mundial gracias a su estilo oscuro y cinematográfico, mezclando R&B, pop y sonidos experimentales. Álbumes como “Starboy”, “After Hours” y “Dawn FM” marcaron distintas etapas de su carrera y lo consolidaron como un artista global.
+
+</p>
+
+<div class="stats">
+
+<div class="stat">
+<h3>4B+</h3>
+<p>Streams</p>
+</div>
+
+<div class="stat">
+<h3>80M+</h3>
+<p>Oyentes</p>
+</div>
+
+<div class="stat">
+<h3>7</h3>
+<p>Álbumes</p>
+</div>
+
+<div class="stat">
+<h3>100+</h3>
+<p>Premios</p>
+</div>
+
+</div>
+
+</section>
+
+<!-- ALBUMS -->
+
+<section id="albums">
+
+<h2 class="section-title">Álbumes</h2>
+
+<div class="album-grid">
+
+<div class="album">
+<img src="after.jpg">
+<div class="album-content">
+<h3>After Hours</h3>
+<p>Oscuro, cinematográfico y emocional.</p>
+</div>
+</div>
+
+<div class="album">
+<img src="dawnfm.jpg">
+<div class="album-content">
+<h3>Dawn FM</h3>
+<p>Conceptual y futurista.</p>
+</div>
+</div>
+
+<div class="album">
+<img src="starboy.jpg">
+<div class="album-content">
+<h3>Starboy</h3>
+<p>El álbum que dominó el mundo.</p>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- TOURS -->
+
+<section id="tours">
+
+<h2 class="section-title">Tours</h2>
+
+<div class="tours">
+
+<section id="tours">
+
+<h2 class="section-title">Tours</h2>
+
+<div class="tours">
+
+<!-- ARGENTINA -->
+
+<div class="tour">
+
+<span>Buenos Aires • Argentina</span>
+
+<a href="https://www.ticketmaster.com/the-weeknd-tickets/artist/1697014" target="_blank">
+<button>Entradas</button>
+</a>
+
+</div>
+
+<!-- BRASIL -->
+
+<div class="tour">
+
+<span>São Paulo • Brasil</span>
+
+<a href="https://www.ticketmaster.com/the-weeknd-tickets/artist/1697014" target="_blank">
+<button>Entradas</button>
+</a>
+
+</div>
+
+<!-- USA -->
+
+<div class="tour">
+
+<span>Los Angeles • USA</span>
+
+<a href="https://www.ticketmaster.com/the-weeknd-tickets/artist/1697014" target="_blank">
+<button>Entradas</button>
+</a>
+
+</div>
+
+<!-- FRANCIA -->
+
+<div class="tour">
+
+<span>Paris • Francia</span>
+
+<a href="https://www.ticketmaster.com/the-weeknd-tickets/artist/1697014" target="_blank">
+<button>Entradas</button>
+</a>
+
+</div>
+
+<!-- JAPÓN -->
+
+<div class="tour">
+
+<span>Tokyo • Japón</span>
+
+<a href="https://www.ticketmaster.com/the-weeknd-tickets/artist/1697014" target="_blank">
+<button>Entradas</button>
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- LIVE -->
+
+<section id="live">
+
+<h2 class="section-title">Live Experience</h2>
+
+<div class="video-container">
+
+<iframe
+src="https://www.youtube.com/embed/XXYlFuWEuKI"
+allowfullscreen>
+</iframe>
+
+</div>
+
+</section>
+
+<!-- SPOTIFY -->
+
+<section id="spotify">
+
+<h2 class="section-title">Spotify</h2>
+
+<div class="spotify">
+
+<iframe style="border-radius:12px"
+src="https://open.spotify.com/embed/artist/1Xyo4u8uXC1ZmMpatF05PJ"
+width="350"
+height="450"
+allowfullscreen=""
+loading="lazy">
+</iframe>
+
+</div>
+
+</section>
+
+<!-- GALLERY -->
+
+<section id="gallery">
+
+<h2 class="section-title">Galería</h2>
+
+<div class="gallery">
+
+<img src="foto1.jpg" onclick="openModal(this.src)">
+<img src="foto2.jpg" onclick="openModal(this.src)">
+<img src="foto3.jpg" onclick="openModal(this.src)">
+<img src="foto4.jpeg" onclick="openModal(this.src)">
+
+</div>
+
+</section>
+
+<!-- FRASES -->
+
+<section id="quotes">
+
+<h2 class="section-title">Frases icónicas</h2>
+
+<div class="album-grid">
+
+<div class="album">
+<div class="album-content">
+<p>"I said oooh, I'm blinded by the lights."</p>
+</div>
+</div>
+
+<div class="album">
+<div class="album-content">
+<p>"Never need a bitch, I'm what a bitch need."</p>
+</div>
+</div>
+
+<div class="album">
+<div class="album-content">
+<p>"Call out my name when I kiss you so gently."</p>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- TOP SONGS -->
+
+<section id="topsongs">
+
+<h2 class="section-title">Top canciones</h2>
+
+<div class="tours">
+
+<div class="tour">
+<span>1 • Blinding Lights</span>
+
+<a href="https://open.spotify.com/track/0VjIjW4GlUZAMYd2vXMi3b" target="_blank">
+<button>Escuchar</button>
+</a>
+
+</div>
+
+<div class="tour">
+<span>2 • Starboy</span>
+
+<a href="https://open.spotify.com/track/7MXVkk9YMctZqd1Srtv4MB" target="_blank">
+<button>Escuchar</button>
+</a>
+
+</div>
+
+<div class="tour">
+<span>3 • Die For You</span>
+
+<a href="https://open.spotify.com/track/2LBqCSwhJGcFQeTHMVGwy3" target="_blank">
+<button>Escuchar</button>
+</a>
+
+</div>
+
+<div class="tour">
+<span>4 • Save Your Tears</span>
+
+<a href="https://open.spotify.com/track/0e7ipj03S05BNilyu5bRzt" target="_blank">
+<button>Escuchar</button>
+</a>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- MERCH -->
+
+<section id="merch">
+
+<h2 class="section-title">XO Merch</h2>
+
+<div class="album-grid">
+
+<div class="album">
+
+<img src="https://images.unsplash.com/photo-1521572163474-6864f9cf17ab">
+
+<div class="album-content">
+
+<h3>XO Hoodie</h3>
+
+<p>Edición limitada oficial.</p>
+
+<a href="https://shop.theweeknd.com/" target="_blank">
+<button style="margin-top:15px;">Comprar</button>
+</a>
+
+</div>
+
+</div>
+
+<div class="album">
+
+<img src="https://images.unsplash.com/photo-1503342217505-b0a15ec3261c">
+
+<div class="album-content">
+
+<h3>After Hours Vinyl</h3>
+
+<p>Vinilo coleccionable.</p>
+
+<a href="https://shop.theweeknd.com/" target="_blank">
+<button style="margin-top:15px;">Comprar</button>
+</a>
+
+</div>
+
+</div>
+
+<div class="album">
+
+<img src="https://images.unsplash.com/photo-1523398002811-999ca8dec234">
+
+<div class="album-content">
+
+<h3>XO T-Shirt</h3>
+
+<p>Merch oficial XO.</p>
+
+<a href="https://shop.theweeknd.com/" target="_blank">
+<button style="margin-top:15px;">Comprar</button>
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- DISCOGRAFÍA -->
+
+<section id="discografia">
+
+<h2 class="section-title">Discografía</h2>
+
+<div class="tours">
+
+<div class="tour">
+<span>House of Balloons • 2011</span>
+</div>
+
+<div class="tour">
+<span>Kiss Land • 2013</span>
+</div>
+
+<div class="tour">
+<span>Beauty Behind The Madness • 2015</span>
+</div>
+
+<div class="tour">
+<span>Starboy • 2016</span>
+</div>
+
+<div class="tour">
+<span>After Hours • 2020</span>
+</div>
+
+<div class="tour">
+<span>Dawn FM • 2022</span>
+</div>
+
+</div>
+
+</section>
+
+<!-- COUNTDOWN -->
+
+<section id="countdown">
+
+<h2 class="section-title">Próximo show</h2>
+
+<div class="newsletter">
+
+<h1 id="timer" style="font-size:50px; color:red;">
+00 : 00 : 00
+</h1>
+
+<p style="margin-top:20px;">
+Countdown para el próximo tour 🌙
+</p>
+
+</div>
+
+</section>
+
+<!-- NEWS -->
+
+<section id="news">
+
+<h2 class="section-title">Últimas noticias</h2>
+
+<div class="album-grid">
+
+<div class="album">
+<div class="album-content">
+<h3>Nuevo tour mundial</h3>
+<p>The Weeknd anunció nuevas fechas internacionales.</p>
+</div>
+</div>
+
+<div class="album">
+<div class="album-content">
+<h3>Récord en Spotify</h3>
+<p>Superó millones de oyentes mensuales nuevamente.</p>
+</div>
+</div>
+
+<div class="album">
+<div class="album-content">
+<h3>Nueva era visual</h3>
+<p>Fans esperan el próximo proyecto conceptual.</p>
+</div>
+</div>
+
+</div>
+
+</section>
+
+<!-- NEWSLETTER -->
+
+<section id="newsletter">
+
+<div class="newsletter">
+
+<h2 class="section-title">Newsletter XO</h2>
+
+<p>
+Recibí novedades, tours y lanzamientos exclusivos.
+</p>
+
+<input type="email" placeholder="Tu correo">
+<button>Suscribirse</button>
+
+</div>
+
+</section>
+
+<!-- MODAL -->
+
+<div class="modal" id="modal" onclick="closeModal()">
+<img id="modalImg">
+</div>
+
+<!-- MUSIC -->
+
+<button class="music-btn" onclick="toggleMusic()">🎧</button>
+
+<audio id="audio" loop>
+<source src="random.jpeg">
+</audio>
+
+<!-- FOOTER -->
+
+<footer>
+
+<h3>XO Fan Experience 🌙</h3>
+
+<p style="margin-top:15px; opacity:0.7;">
+Inspired by the cinematic universe of The Weeknd.
+</p>
+
+</footer>
+
+<script>
+
+/* CURSOR */
+
+const cursor=document.getElementById("cursor");
+
+document.addEventListener("mousemove",(e)=>{
+
+cursor.style.left=e.clientX+"px";
+cursor.style.top=e.clientY+"px";
+
+});
+
+/* MODAL */
+
+function openModal(src){
+
+document.getElementById("modal").style.display="flex";
+document.getElementById("modalImg").src=src;
+
+}
+
+function closeModal(){
+
+document.getElementById("modal").style.display="none";
+
+}
+
+/* MUSIC */
+
+let playing=false;
+
+function toggleMusic(){
+
+const audio=document.getElementById("audio");
+
+if(!playing){
+
+audio.play();
+playing=true;
+
+}
+
+else{
+
+audio.pause();
+playing=false;
+
+}
+
+}
+
+/* PARTICLES */
+
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let particles=[];
+
+for(let i=0;i<100;i++){
+
+particles.push({
+
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+r:Math.random()*2,
+d:Math.random()*1
+
+})
+
+}
+
+function draw(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height);
+
+ctx.fillStyle="red";
+
+particles.forEach(p=>{
+
+ctx.beginPath();
+ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+ctx.fill();
+
+p.y+=p.d;
+
+if(p.y>canvas.height){
+p.y=0;
+}
+
+});
+
+requestAnimationFrame(draw);
+
+}
+
+draw();
+
+</script>
+
+</body>
+</html>
